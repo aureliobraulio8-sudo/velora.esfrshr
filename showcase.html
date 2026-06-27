@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>VELORA IA</title>
+<script>!function(){function g(k,d){try{return JSON.parse(localStorage.getItem('vp_'+k))??d}catch(e){return d}}var dark=g('dark',true);document.documentElement.setAttribute('data-theme',dark?'dark':'light');}();</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+:root,[data-theme="dark"]{--bg:#000;--bg2:#080008;--bg3:#0d000d;--border:#1a001a;--accent:#d414bd;--accent2:#9b12d4;--text:#fff;--text2:#bbb;--text3:#555;}
+[data-theme="light"]{--bg:#f8f8f8;--bg2:#fff;--bg3:#f0f0f0;--border:#e0e0e0;--text:#111;--text2:#555;--text3:#999;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;padding-bottom:80px;}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);}
+[data-theme="light"] header{background:var(--bg2);}
+.h-top{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;}
+.logo{font-size:22px;font-weight:900;font-style:italic;letter-spacing:-0.5px;background:linear-gradient(135deg,#fff,#d414bd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+[data-theme="light"] .logo{background:linear-gradient(135deg,#111,#d414bd);-webkit-background-clip:text;}
+.h-actions{display:flex;align-items:center;gap:10px;}
+.btn-avatar{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#f472b6;cursor:pointer;overflow:hidden;flex-shrink:0;}
+.btn-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.btn-plus-h{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;color:#fff;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;}
+
+/* ── HERO ── */
+.hero{padding:24px 18px 16px;text-align:center;}
+.hero-tag{display:inline-block;background:rgba(212,20,189,0.1);border:1px solid rgba(212,20,189,0.3);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1.5px;margin-bottom:10px;}
+.hero-title{font-size:24px;font-weight:900;line-height:1.2;margin-bottom:6px;}
+.hero-title span{color:var(--accent);}
+.hero-sub{font-size:13px;color:var(--text2);line-height:1.5;}
+
+/* ── QUICK ACTIONS ── */
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:16px 18px 0;}
+.qa{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .15s;}
+.qa:hover{border-color:var(--accent);}
+.qa-ic{width:38px;height:38px;border-radius:10px;background:rgba(212,20,189,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--accent);flex-shrink:0;}
+.qa-name{font-size:14px;font-weight:700;color:var(--text);}
+.qa-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+.qa-full{grid-column:1/-1;}
+
+/* ── SECÇÕES ── */
+.sec{padding:28px 18px 0;}
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.sec-t{font-size:18px;font-weight:800;}
+.sec-b{background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;}
+
+/* ── GRIDS ── */
+.grid-mix{display:grid;grid-template-areas:'a a' 'b c' 'd d' 'e e' 'f g' 'h h';grid-template-columns:1fr 1fr;gap:8px;}
+.grid-mix .ic:nth-child(1){grid-area:a;}
+.grid-mix .ic:nth-child(2){grid-area:b;}
+.grid-mix .ic:nth-child(3){grid-area:c;}
+.grid-mix .ic:nth-child(4){grid-area:d;}
+.grid-mix .ic:nth-child(5){grid-area:e;}
+.grid-mix .ic:nth-child(6){grid-area:f;}
+.grid-mix .ic:nth-child(7){grid-area:g;}
+.grid-mix .ic:nth-child(8){grid-area:h;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.grid-mix-poe{display:grid;grid-template-areas:'a b' 'c c' 'd e' 'f f';grid-template-columns:1fr 1fr;gap:8px;}
+.grid-mix-poe .ic:nth-child(1){grid-area:a;}
+.grid-mix-poe .ic:nth-child(2){grid-area:b;}
+.grid-mix-poe .ic:nth-child(3){grid-area:c;}
+.grid-mix-poe .ic:nth-child(4){grid-area:d;}
+.grid-mix-poe .ic:nth-child(5){grid-area:e;}
+.grid-mix-poe .ic:nth-child(6){grid-area:f;}
+
+/* ── CARD ── */
+.ic{border-radius:14px;overflow:hidden;position:relative;background:var(--bg3);cursor:pointer;}
+.ic img{width:100%;height:100%;object-fit:cover;display:block;}
+.ic.wide{aspect-ratio:16/9;}
+.ic.sq{aspect-ratio:1;}
+.ic.tall{aspect-ratio:3/4;}
+
+/* ── OVERLAY ── */
+.ov{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.05) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;}
+.ov-accent{position:absolute;left:0;top:0;bottom:0;width:3.5px;background:linear-gradient(to bottom,transparent,rgba(212,20,189,1),transparent);z-index:3;}
+
+/* Motivação */
+.mot-f{font-size:17px;font-weight:900;color:#fff;line-height:1.3;text-shadow:0 2px 16px rgba(0,0,0,1);padding-left:12px;}
+.mot-f.lg{font-size:20px;}
+.mot-f.sm{font-size:14px;}
+.mot-s{font-size:10px;color:rgba(255,255,255,0.5);margin-top:5px;text-transform:uppercase;letter-spacing:0.8px;padding-left:12px;}
+
+/* Poesia */
+.poe-t{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:rgba(212,20,189,0.98);margin-bottom:5px;text-shadow:0 0 16px rgba(212,20,189,0.6);}
+.poe-t.lg{font-size:17px;}
+.poe-v{font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:rgba(255,255,255,0.93);line-height:1.7;text-shadow:0 2px 12px rgba(0,0,0,1);}
+.poe-v.lg{font-size:14px;}
+
+/* Meme */
+.mem-bg{position:absolute;inset:0;z-index:2;background:rgba(0,0,0,0.52);}
+.mem-t{position:absolute;top:10px;left:0;right:0;z-index:3;text-align:center;padding:0 10px;}
+.mem-e{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;font-size:36px;line-height:1;}
+.mem-b{position:absolute;bottom:10px;left:0;right:0;z-index:3;text-align:center;padding:0 10px;}
+.mem-txt{font-size:13px;font-weight:900;color:#fff;line-height:1.3;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;}
+
+/* Legenda */
+.leg-tipo{font-size:9px;font-weight:800;letter-spacing:2px;color:#d414bd;background:rgba(212,20,189,0.18);border:1px solid rgba(212,20,189,0.5);border-radius:5px;padding:2px 8px;width:fit-content;margin-bottom:6px;}
+.leg-txt{font-size:12px;color:rgba(255,255,255,0.95);line-height:1.6;text-shadow:0 2px 12px rgba(0,0,0,1);}
+
+/* Badge */
+.vb{position:absolute;bottom:6px;right:8px;z-index:4;font-size:8px;font-weight:700;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+/* ── VIRALIZAR ── */
+.vir-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:10px;position:relative;overflow:hidden;}
+.vir-num{font-size:52px;font-weight:900;color:rgba(212,20,189,0.06);position:absolute;top:-8px;right:12px;line-height:1;}
+.vir-badge{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;padding:3px 12px;font-size:11px;font-weight:800;color:#fff;letter-spacing:1px;margin-bottom:10px;}
+.vir-title{font-size:17px;font-weight:800;margin-bottom:12px;line-height:1.3;color:var(--text);}
+.vir-steps{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.vir-step{display:flex;align-items:flex-start;gap:10px;}
+.step-n{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px;}
+.step-txt{color:var(--text2);font-size:14px;line-height:1.5;}
+.step-txt strong{color:var(--text);display:block;font-weight:700;margin-bottom:1px;}
+.vir-tag{display:inline-flex;gap:5px;align-items:center;background:rgba(212,20,189,0.1);border:1px solid rgba(212,20,189,0.2);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--accent);margin-top:12px;}
+
+/* ── CTA ── */
+.cta{margin:28px 18px 0;background:linear-gradient(135deg,rgba(212,20,189,0.1),rgba(155,18,212,0.1));border:1px solid rgba(212,20,189,0.25);border-radius:20px;padding:28px 20px;text-align:center;}
+.cta-t{font-size:22px;font-weight:900;margin-bottom:6px;}
+.cta-s{color:var(--text2);font-size:13px;margin-bottom:18px;line-height:1.5;}
+.btn-cta{width:100%;padding:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:10px;}
+.btn-sec{width:100%;padding:13px;background:transparent;border:1.5px solid var(--border);border-radius:14px;color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;}
+
+/* ── BOTTOM NAV ── */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--bg);border-top:1px solid var(--border);display:flex;padding:6px 0 16px;}
+[data-theme="light"] .bnav{background:var(--bg2);}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px;cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;}
+.bn i{font-size:20px;color:var(--text3);}
+.bn span{font-size:10px;font-weight:600;color:var(--text3);}
+.bn.active i,.bn.active span{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="h-top">
+    <div class="logo">VELORA IA</div>
+    <div class="h-actions">
+      <button class="btn-plus-h" onclick="location.href='plus.html'">Plus 👑</button>
+      <div class="btn-avatar" id="av" onclick="location.href='settings.html'">A</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">CRIADO PELA VELORA IA</div>
+  <h1 class="hero-title">Vê o que a nossa <span>IA</span> cria</h1>
+  <p class="hero-sub">Imagens, poesia, memes e estratégias virais — tudo em segundos</p>
+</div>
+
+<!-- ── QUICK ACTIONS ── -->
+<div class="quick">
+  <div class="qa" onclick="location.href='chat.html'">
+    <div class="qa-ic"><i class="fa-regular fa-comment"></i></div>
+    <div><div class="qa-name">Chat IA</div><div class="qa-sub">Conversa livre</div></div>
+  </div>
+  <div class="qa" onclick="location.href='imagine.html'">
+    <div class="qa-ic"><i class="fa-regular fa-image"></i></div>
+    <div><div class="qa-name">Gerar Imagens</div><div class="qa-sub">IA Criativa</div></div>
+  </div>
+  <div class="qa" onclick="location.href='legend.html'">
+    <div class="qa-ic"><i class="fa-solid fa-pen-nib"></i></div>
+    <div><div class="qa-name">Legendas</div><div class="qa-sub">Virais e impactantes</div></div>
+  </div>
+  <div class="qa" onclick="location.href='plus.html'" style="border-color:rgba(212,20,189,0.4);background:rgba(212,20,189,0.05);">
+    <div class="qa-ic" style="background:linear-gradient(135deg,rgba(212,20,189,0.2),rgba(155,18,212,0.2));"><i class="fa-solid fa-crown"></i></div>
+    <div><div class="qa-name" style="color:var(--accent);">VELORA Plus</div><div class="qa-sub">Ilimitado</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           MOTIVAÇÃO                   -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t">💪 Motivação</div><button class="sec-b" onclick="location.href='chat.html'">Criar →</button></div>
+  <div class="grid-mix">
+
+    <div class="ic wide">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg">O teu único limite<br>és tu mesmo.</div><div class="mot-s">Acredita no processo</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&q=85" alt=""/>
+      <div class="ov"><div class="mot-f sm">Cai.<br>Levanta.<br>Vence.</div><div class="mot-s">Nunca desistas</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?w=400&q=85" alt=""/>
+      <div class="ov"><div class="mot-f sm">O caminho<br>é teu.</div><div class="mot-s">Mantém o foco</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic wide">
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=85" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg">O sucesso não<br>tem atalho.</div><div class="mot-s">Só trabalho e dedicação</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic wide">
+      <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&q=85" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg">As montanhas mais altas<br>têm a vista mais linda.</div><div class="mot-s">Persiste sempre</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1502780402662-acc01917609e?w=400&q=85" alt=""/>
+      <div class="ov"><div class="mot-f sm">Começa<br>hoje.</div><div class="mot-s">Não amanhã</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=85" alt=""/>
+      <div class="ov"><div class="mot-f sm">A coragem<br>é a chave.</div><div class="mot-s">Arrisca e cresce</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic wide">
+      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=85" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg">Cada amanhecer<br>é uma nova chance.</div><div class="mot-s">Aproveita o momento</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           POESIA                      -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t">🖤 Poesia</div><button class="sec-b" onclick="location.href='chat.html'">Criar →</button></div>
+  <div class="grid-mix-poe">
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=400&q=85" alt=""/>
+      <div class="ov"><div class="poe-t">Amor</div><div class="poe-v">Guardei o teu<br>sorriso no vento.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=400&q=85" alt=""/>
+      <div class="ov"><div class="poe-t">Solidão</div><div class="poe-v">O silêncio fala<br>mais que mil<br>palavras.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic wide">
+      <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=85" alt=""/>
+      <div class="ov"><div class="poe-t lg">Liberdade</div><div class="poe-v lg">Livre é quem voa sem pedir licença<br>ao vento que sopra em qualquer direção.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=400&q=85" alt=""/>
+      <div class="ov"><div class="poe-t">Saudade</div><div class="poe-v">Saudade é o amor<br>que ficou<br>sem ter onde ir.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc3e?w=400&q=85" alt=""/>
+      <div class="ov"><div class="poe-t">Beleza</div><div class="poe-v">Cada pétala<br>é um poema<br>que a natureza<br>escreve.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic wide">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=85" alt=""/>
+      <div class="ov"><div class="poe-t lg">Esperança</div><div class="poe-v lg">O mar devolve sempre à praia<br>o que o vento levou com pressa.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           MEMES                       -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t">😂 Memes</div><button class="sec-b" onclick="location.href='chat.html'">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&q=85" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt">EU: hoje vou ser<br>muito produtivo</div></div>
+      <div class="mem-e">📱</div>
+      <div class="mem-b"><div class="mem-txt">Eu 5 minutos depois:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&q=85" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt">Segunda-feira às 7h</div></div>
+      <div class="mem-e">😭</div>
+      <div class="mem-b"><div class="mem-txt">O meu humor:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=85" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt">Carteira dia 1:</div></div>
+      <div class="mem-e">💸</div>
+      <div class="mem-b"><div class="mem-txt">Carteira dia 30:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=85" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt">"A dieta começa<br>amanhã"</div></div>
+      <div class="mem-e">🍕</div>
+      <div class="mem-b"><div class="mem-txt">Eu às 23h59:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1525904097878-94fb15835963?w=400&q=85" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt">Quando dizes<br>"só 5 minutos"</div></div>
+      <div class="mem-e">⏰</div>
+      <div class="mem-b"><div class="mem-txt">3 horas depois:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1534308143481-c55f00dc4d4e?w=400&q=85" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt">O meu banco<br>às 6h da manhã:</div></div>
+      <div class="mem-e">😱</div>
+      <div class="mem-b"><div class="mem-txt">"Saldo insuficiente"</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           LEGENDAS                    -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t">✍️ Legendas</div><button class="sec-b" onclick="location.href='legend.html'">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=85" alt=""/>
+      <div class="ov"><div class="leg-tipo">INSTAGRAM</div><div class="leg-txt">O caminho constrói-se<br>enquanto andas. 🌱<br><br>Qual é o teu próximo passo?</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&q=85" alt=""/>
+      <div class="ov"><div class="leg-tipo">TIKTOK HOOK</div><div class="leg-txt">Para de fazer isto<br>no TikTok se queres<br>crescer → 🎯</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=85" alt=""/>
+      <div class="ov"><div class="leg-tipo">LINKEDIN</div><div class="leg-txt">A diferença entre<br>sonhar e realizar:<br>acção diária. ✨</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=400&q=85" alt=""/>
+      <div class="ov"><div class="leg-tipo">VIAGEM</div><div class="leg-txt">O mundo é grande<br>e tu és livre<br>para explorá-lo. 🌍</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=85" alt=""/>
+      <div class="ov"><div class="leg-tipo">FOOD</div><div class="leg-txt">A vida é curta<br>para comer mal. 🍽️<br><br>Celebra cada refeição.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=85" alt=""/>
+      <div class="ov"><div class="leg-tipo">MOTIVACIONAL</div><div class="leg-txt">Grandes resultados<br>exigem grande<br>coragem. 💜</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           VIRALIZAR                   -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t">🚀 Viralizar</div><button class="sec-b" onclick="location.href='chat.html'">Aprender →</button></div>
+
+  <div class="vir-card">
+    <div class="vir-num">01</div>
+    <div class="vir-badge">VIRAL EM 24H</div>
+    <div class="vir-title">3 passos para viralizar amanhã</div>
+    <ul class="vir-steps">
+      <li class="vir-step"><div class="step-n">1</div><div class="step-txt"><strong>Gancho nos primeiros 3 segundos</strong>Começa com "Ninguém te conta isto sobre..." — para o scroll imediatamente e cria curiosidade irresistível.</div></li>
+      <li class="vir-step"><div class="step-n">2</div><div class="step-txt"><strong>Valor real e aplicável hoje</strong>Dá uma dica genuína que as pessoas possam usar hoje. Conteúdo útil é sempre partilhado.</div></li>
+      <li class="vir-step"><div class="step-n">3</div><div class="step-txt"><strong>CTA de partilha no final</strong>"Partilha com alguém que precisa de ver isto." Simples e aumenta o alcance 3x.</div></li>
+    </ul>
+    <div class="vir-tag"><i class="fa-solid fa-arrow-trend-up" style="font-size:10px;"></i> TikTok · Instagram · Reels</div>
+  </div>
+
+  <div class="vir-card">
+    <div class="vir-num">02</div>
+    <div class="vir-badge">MIL SEGUIDORES EM 2 DIAS</div>
+    <div class="vir-title">O que fazer para crescer muito rápido</div>
+    <ul class="vir-steps">
+      <li class="vir-step"><div class="step-n">1</div><div class="step-txt"><strong>Comenta em contas grandes</strong>Comentários com valor real em perfis 100k+. A audiência deles vê o teu nome.</div></li>
+      <li class="vir-step"><div class="step-n">2</div><div class="step-txt"><strong>Posta 3x por dia nos picos</strong>7h-9h, 12h-14h e 19h-21h. São os momentos de maior actividade do algoritmo.</div></li>
+      <li class="vir-step"><div class="step-n">3</div><div class="step-txt"><strong>Responde a todos nos primeiros 60 min</strong>O algoritmo detecta o engagement e distribui o teu conteúdo a muito mais pessoas.</div></li>
+      <li class="vir-step"><div class="step-n">4</div><div class="step-txt"><strong>Colabora com outros criadores</strong>Dueto ou menção mútua — a audiência deles passa a conhecer-te em minutos.</div></li>
+    </ul>
+    <div class="vir-tag"><i class="fa-solid fa-arrow-trend-up" style="font-size:10px;"></i> Crescimento Rápido · Estratégia</div>
+  </div>
+
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta">
+  <div class="cta-t">Pronto para criar? ✨</div>
+  <p class="cta-s">Começa grátis. Sem cartão. Sem compromissos.</p>
+  <button class="btn-cta" onclick="location.href='chat.html'">🚀 Começar a Criar Agora</button>
+  <button class="btn-sec" onclick="location.href='plus.html'">Ver Planos Plus 👑</button>
+</div>
+
+<!-- ── BOTTOM NAV ── -->
+<nav class="bnav">
+  <button class="bn active" onclick="location.href='showcase.html'">
+    <i class="fa-solid fa-house"></i><span>Início</span>
+  </button>
+  <button class="bn" onclick="location.href='chat.html'">
+    <i class="fa-regular fa-comment"></i><span>Chat</span>
+  </button>
+  <button class="bn" onclick="location.href='imagine.html'">
+    <i class="fa-regular fa-image"></i><span>Imagens</span>
+  </button>
+  <button class="bn" onclick="location.href='legend.html'">
+    <i class="fa-solid fa-pen-nib"></i><span>Legendas</span>
+  </button>
+  <button class="bn" onclick="location.href='settings.html'">
+    <i class="fa-solid fa-gear"></i><span>Definições</span>
+  </button>
+</nav>
+
+<script>
+// Carregar avatar
+(function(){
+  const uid = localStorage.getItem('velora_uid');
+  if (!uid) return;
+  const foto = localStorage.getItem('velora_foto_' + uid);
+  const av = document.getElementById('av');
+  if (foto) av.innerHTML = `<img src="${foto}" alt="foto">`;
+})();
+
+window.addEventListener('storage', ev => {
+  if (ev.key === 'vp_dark') document.documentElement.setAttribute('data-theme', JSON.parse(ev.newValue) ? 'dark' : 'light');
+});
+</script>
+</body>
+</html>
