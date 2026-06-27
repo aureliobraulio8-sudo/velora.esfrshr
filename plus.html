@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>VELORA Plus</title>
+<script>!function(){function g(k,d){try{return JSON.parse(localStorage.getItem('vp_'+k))??d}catch(e){return d}}var dark=g('dark',true);document.documentElement.setAttribute('data-theme',dark?'dark':'light');window._LANG=g('lang','pt');}();</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+:root,[data-theme="dark"]{--bg:#000;--bg2:#080008;--bg3:#0d000d;--border:#1a001a;--accent:#d414bd;--accent2:#9b12d4;--text:#fff;--text2:#bbb;--text3:#555;}
+[data-theme="light"]{--bg:#f8f8f8;--bg2:#fff;--bg3:#f0f0f0;--border:#e0e0e0;--text:#111;--text2:#555;--text3:#999;}
+*,*::before,*::after{transition-property:none!important;}
+.modal{transition:transform .3s cubic-bezier(.4,0,.2,1)!important;}
+.modal-bg{transition:opacity .25s!important;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;font-size:16px;}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--bg);border-bottom:1px solid var(--border);}
+[data-theme="light"] header{background:var(--bg2);}
+main{padding:24px 18px 100px;max-width:440px;margin:0 auto;}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:32px;}
+.crown-wrap{width:80px;height:80px;background:rgba(212,20,189,0.08);border:1px solid rgba(212,20,189,0.25);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 18px;box-shadow:0 0 30px rgba(212,20,189,0.1);}
+.hero-title{font-size:34px;font-weight:900;margin-bottom:8px;}
+.hero-title span{color:var(--accent);}
+.hero-sub{color:var(--text2);font-size:15px;line-height:1.6;}
+
+/* Planos */
+.plans{display:flex;flex-direction:column;gap:16px;margin-bottom:24px;}
+.plan{background:var(--bg2);border:1.5px solid var(--border);border-radius:20px;padding:22px 18px;position:relative;cursor:pointer;}
+.plan.destaque{border-color:var(--accent);box-shadow:0 0 24px rgba(212,20,189,0.15);}
+.plan-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;padding:4px 16px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#fff;white-space:nowrap;}
+.plan-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.plan-name{font-size:20px;font-weight:800;}
+.plan-price-wrap{text-align:right;}
+.plan-price{font-size:36px;font-weight:900;line-height:1;}
+.plan-price span{font-size:16px;font-weight:500;color:var(--text3);}
+.plan-period{font-size:12px;color:var(--text3);margin-top:2px;}
+.plan-feats{display:flex;flex-direction:column;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+.feat-row{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text2);}
+.feat-row i{color:var(--accent);font-size:14px;margin-top:2px;flex-shrink:0;width:16px;}
+.feat-row strong{color:var(--text);font-weight:600;}
+.plan-badge-rec{display:inline-flex;align-items:center;gap:4px;background:rgba(212,20,189,0.1);border:1px solid rgba(212,20,189,0.25);border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;color:var(--accent);margin-top:12px;}
+
+/* CTA */
+.btn-cta{width:100%;padding:17px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:16px;color:#fff;font-size:17px;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;}
+.btn-cta:active{transform:scale(0.98);}
+.btn-cta.sec{background:var(--bg2);border:1.5px solid var(--border);color:var(--text2);font-weight:600;font-size:15px;}
+.no-commit{text-align:center;font-size:12px;color:var(--text3);margin-bottom:28px;}
+
+/* Comparação */
+.compare{background:var(--bg2);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:20px;}
+.compare-title{font-size:14px;font-weight:700;padding:14px 16px;border-bottom:1px solid var(--border);color:var(--text);}
+.compare-row{display:grid;grid-template-columns:1fr 80px 80px 80px;padding:11px 16px;border-bottom:1px solid var(--border);font-size:13px;align-items:center;}
+.compare-row:last-child{border-bottom:none;}
+.compare-row.header{background:var(--bg3);font-weight:700;font-size:11px;letter-spacing:0.5px;color:var(--text3);}
+.compare-row .feat-name{color:var(--text2);}
+.compare-row .val{text-align:center;font-weight:600;}
+.compare-row .val.yes{color:#22c55e;}
+.compare-row .val.no{color:var(--text3);}
+.compare-row .val.accent{color:var(--accent);}
+
+/* Garantia */
+.guarantee{display:flex;align-items:center;gap:12px;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:14px;padding:14px;}
+.guarantee i{color:#22c55e;font-size:22px;flex-shrink:0;}
+.guarantee-title{font-weight:700;font-size:14px;margin-bottom:2px;}
+.guarantee-sub{font-size:12px;color:var(--text2);}
+
+/* Loading */
+#ls{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;}
+#ls.h{display:none;}
+.ls-spin{width:28px;height:28px;border:3px solid rgba(212,20,189,0.2);border-top-color:#d414bd;border-radius:50%;animation:spin .7s linear infinite;margin-top:20px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--accent);border-radius:12px;padding:10px 20px;font-size:13px;z-index:999;opacity:0;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;}
+#toast.s{border-color:#22c55e;}
+</style>
+</head>
+<body>
+
+<div id="ls">
+  <div style="font-size:40px;font-weight:900;font-style:italic;">VELORA IA</div>
+  <div class="ls-spin"></div>
+</div>
+
+<header>
+  <button onclick="history.back()" style="background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;padding:4px;"><i class="fa-solid fa-arrow-left"></i></button>
+  <h1 id="pg-title" style="font-size:16px;font-weight:900;letter-spacing:3px;">VELORA PLUS</h1>
+  <div style="width:28px;"></div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="crown-wrap">👑</div>
+    <div class="hero-title">VELORA <span>Plus</span></div>
+    <div class="hero-sub" id="hero-sub">Desbloqueia todo o potencial da tua IA pessoal</div>
+  </div>
+
+  <!-- Planos -->
+  <div class="plans">
+
+    <!-- Standard -->
+    <div class="plan" id="plan-standard" onclick="selectPlan('standard')">
+      <div class="plan-header">
+        <div>
+          <div class="plan-name" id="name-standard">Standard</div>
+          <div class="plan-badge-rec"><i class="fa-solid fa-fire" style="font-size:10px;"></i> <span id="popular-label">Mais Popular</span></div>
+        </div>
+        <div class="plan-price-wrap">
+          <div class="plan-price">€9<span>,90</span></div>
+          <div class="plan-period" id="period-label">/mês</div>
+        </div>
+      </div>
+      <div class="plan-feats">
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="f1">Chat ilimitado</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="f2">30 imagens/dia</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="f3">30 legendas/dia</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="f4">Sem esperas</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="f5">Memes, Poesia, Motivação</strong></div></div>
+      </div>
+    </div>
+
+    <!-- Premium -->
+    <div class="plan destaque" id="plan-premium" onclick="selectPlan('premium')">
+      <div class="plan-badge" id="badge-premium">PREMIUM</div>
+      <div class="plan-header" style="margin-top:8px;">
+        <div>
+          <div class="plan-name" id="name-premium">Premium</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;" id="premium-sub">Tudo sem limites</div>
+        </div>
+        <div class="plan-price-wrap">
+          <div class="plan-price">€19<span>,90</span></div>
+          <div class="plan-period" id="period-label2">/mês</div>
+        </div>
+      </div>
+      <div class="plan-feats">
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="g1">Tudo do Standard</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="g2">Imagens ilimitadas</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="g3">Legendas ilimitadas</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="g4">Resposta prioritária</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="g5">Modelos avançados (em breve)</strong></div></div>
+        <div class="feat-row"><i class="fa-solid fa-check"></i><div><strong id="g6">Suporte prioritário</strong></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <button class="btn-cta" id="btn-sub" onclick="subscribe()">
+    <span>👑</span> <span id="btn-txt">Assinar Standard — €9,90/mês</span>
+  </button>
+  <p class="no-commit" id="no-commit">Cancela quando quiseres · Sem compromissos</p>
+
+  <!-- Tabela comparativa -->
+  <div class="compare">
+    <div class="compare-title" id="compare-title">Comparação de planos</div>
+    <div class="compare-row header">
+      <div id="ch-func">Funcionalidade</div>
+      <div style="text-align:center;" id="ch-free">Grátis</div>
+      <div style="text-align:center;" id="ch-std">Standard</div>
+      <div style="text-align:center;" id="ch-prem">Premium</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat-name" id="c1">Chat IA</div>
+      <div class="val yes">✓</div>
+      <div class="val yes">✓</div>
+      <div class="val yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat-name" id="c2">Imagens</div>
+      <div class="val no" id="c2-free">5/dia</div>
+      <div class="val accent" id="c2-std">30/dia</div>
+      <div class="val yes" id="c2-prem">∞</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat-name" id="c3">Legendas</div>
+      <div class="val no" id="c3-free">5/dia</div>
+      <div class="val accent" id="c3-std">30/dia</div>
+      <div class="val yes" id="c3-prem">∞</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat-name" id="c4">Memes & Poesia</div>
+      <div class="val no" id="c4-free">5/dia</div>
+      <div class="val accent">∞</div>
+      <div class="val yes">∞</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat-name" id="c5">Sem esperas</div>
+      <div class="val no">✗</div>
+      <div class="val yes">✓</div>
+      <div class="val yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat-name" id="c6">Prioridade</div>
+      <div class="val no">✗</div>
+      <div class="val no">✗</div>
+      <div class="val yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat-name" id="c7">Modelos avançados</div>
+      <div class="val no">✗</div>
+      <div class="val no">✗</div>
+      <div class="val yes" id="c7-prem">Em breve</div>
+    </div>
+  </div>
+
+  <!-- Garantia -->
+  <div class="guarantee">
+    <i class="fa-solid fa-shield-halved"></i>
+    <div>
+      <div class="guarantee-title" id="g-title">Garantia de 7 dias</div>
+      <div class="guarantee-sub" id="g-sub">Se não ficares satisfeito, devolvemos o dinheiro sem questões.</div>
+    </div>
+  </div>
+
+</main>
+
+<div id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const auth = getAuth(initializeApp({
+  apiKey: "AIzaSyAW2ISQ2TKR2p0-QF_v0aADiD-ttDpGm3c",
+  authDomain: "velora-ia-e2539.firebaseapp.com",
+  projectId: "velora-ia-e2539",
+  storageBucket: "velora-ia-e2539.firebasestorage.app",
+  messagingSenderId: "876348453170",
+  appId: "1:876348453170:web:bcca8ebde23563e26a412b"
+}));
+
+const STRIPE = {
+  standard: 'https://buy.stripe.com/4gMfZ9akdbZR8MH2fGfw400',
+  premium:  'https://buy.stripe.com/bJeaEP2RLfc3gf94nOfw402'
+};
+
+const P = {
+  get: (k, d) => { try { return JSON.parse(localStorage.getItem('vp_' + k)) ?? d; } catch { return d; } },
+  set: (k, v) => localStorage.setItem('vp_' + k, JSON.stringify(v))
+};
+
+let user = null;
+let planSel = 'standard';
+
+// Traduções
+const TT = {
+  pt: {
+    title: 'VELORA PLUS', hero_sub: 'Desbloqueia todo o potencial da tua IA pessoal',
+    popular: 'Mais Popular', period: '/mês', premium_sub: 'Tudo sem limites',
+    f1:'Chat ilimitado', f2:'30 imagens/dia', f3:'30 legendas/dia', f4:'Sem esperas', f5:'Memes, Poesia, Motivação',
+    g1:'Tudo do Standard', g2:'Imagens ilimitadas', g3:'Legendas ilimitadas', g4:'Resposta prioritária', g5:'Modelos avançados (em breve)', g6:'Suporte prioritário',
+    btn_std: 'Assinar Standard — €9,90/mês', btn_prem: 'Assinar Premium — €19,90/mês',
+    no_commit: 'Cancela quando quiseres · Sem compromissos',
+    compare: 'Comparação de planos', ch_func: 'Funcionalidade', ch_free: 'Grátis', ch_std: 'Standard', ch_prem: 'Premium',
+    c1:'Chat IA', c2:'Imagens', c3:'Legendas', c4:'Memes & Poesia', c5:'Sem esperas', c6:'Prioridade', c7:'Modelos avançados', c7p:'Em breve',
+    g_title: 'Garantia de 7 dias', g_sub: 'Se não ficares satisfeito, devolvemos o dinheiro sem questões.',
+    ja_ativo: 'Plano já activo!'
+  },
+  en: {
+    title: 'VELORA PLUS', hero_sub: 'Unlock the full potential of your personal AI',
+    popular: 'Most Popular', period: '/month', premium_sub: 'Everything unlimited',
+    f1:'Unlimited chat', f2:'30 images/day', f3:'30 captions/day', f4:'No waiting', f5:'Memes, Poetry, Motivation',
+    g1:'Everything in Standard', g2:'Unlimited images', g3:'Unlimited captions', g4:'Priority response', g5:'Advanced models (coming soon)', g6:'Priority support',
+    btn_std: 'Subscribe Standard — €9.90/month', btn_prem: 'Subscribe Premium — €19.90/month',
+    no_commit: 'Cancel anytime · No commitments',
+    compare: 'Plan comparison', ch_func: 'Feature', ch_free: 'Free', ch_std: 'Standard', ch_prem: 'Premium',
+    c1:'AI Chat', c2:'Images', c3:'Captions', c4:'Memes & Poetry', c5:'No waiting', c6:'Priority', c7:'Advanced models', c7p:'Coming soon',
+    g_title: '7-day guarantee', g_sub: "If you're not satisfied, we'll refund you, no questions asked.",
+    ja_ativo: 'Plan already active!'
+  },
+  es: {
+    title: 'VELORA PLUS', hero_sub: 'Desbloquea todo el potencial de tu IA personal',
+    popular: 'Más Popular', period: '/mes', premium_sub: 'Todo sin límites',
+    f1:'Chat ilimitado', f2:'30 imágenes/día', f3:'30 leyendas/día', f4:'Sin esperas', f5:'Memes, Poesía, Motivación',
+    g1:'Todo de Standard', g2:'Imágenes ilimitadas', g3:'Leyendas ilimitadas', g4:'Respuesta prioritaria', g5:'Modelos avanzados (pronto)', g6:'Soporte prioritario',
+    btn_std: 'Suscribir Standard — €9,90/mes', btn_prem: 'Suscribir Premium — €19,90/mes',
+    no_commit: 'Cancela cuando quieras · Sin compromisos',
+    compare: 'Comparación de planes', ch_func: 'Función', ch_free: 'Gratis', ch_std: 'Standard', ch_prem: 'Premium',
+    c1:'Chat IA', c2:'Imágenes', c3:'Leyendas', c4:'Memes & Poesía', c5:'Sin esperas', c6:'Prioridad', c7:'Modelos avanzados', c7p:'Pronto',
+    g_title: 'Garantía de 7 días', g_sub: 'Si no estás satisfecho, te devolvemos el dinero sin preguntas.',
+    ja_ativo: '¡Plan ya activo!'
+  }
+};
+
+function lang() { return P.get('lang', 'pt'); }
+function tr(k) { return TT[lang()]?.[k] || TT.pt[k] || k; }
+
+function aplicarTextos() {
+  const t = (id, key) => { const el = document.getElementById(id); if(el) el.textContent = tr(key); };
+  t('pg-title', 'title'); t('hero-sub', 'hero_sub'); t('popular-label', 'popular');
+  t('period-label', 'period'); t('period-label2', 'period'); t('premium-sub', 'premium_sub');
+  t('f1','f1'); t('f2','f2'); t('f3','f3'); t('f4','f4'); t('f5','f5');
+  t('g1','g1'); t('g2','g2'); t('g3','g3'); t('g4','g4'); t('g5','g5'); t('g6','g6');
+  t('no-commit','no_commit'); t('compare-title','compare');
+  t('ch-func','ch_func'); t('ch-free','ch_free'); t('ch-std','ch_std'); t('ch-prem','ch_prem');
+  t('c1','c1'); t('c2','c2'); t('c3','c3'); t('c4','c4'); t('c5','c5'); t('c6','c6'); t('c7','c7'); t('c7-prem','c7p');
+  t('g-title','g_title'); t('g-sub','g_sub');
+  actualizarBotao();
+}
+
+function actualizarBotao() {
+  const btn = document.getElementById('btn-txt');
+  if (btn) btn.textContent = tr(planSel === 'premium' ? 'btn_prem' : 'btn_std');
+}
+
+window.selectPlan = (plan) => {
+  planSel = plan;
+  document.getElementById('plan-standard').style.borderColor = plan === 'standard' ? 'var(--accent)' : 'var(--border)';
+  document.getElementById('plan-premium').style.borderColor = plan === 'premium' ? 'var(--accent)' : 'var(--border)';
+  actualizarBotao();
+};
+
+window.subscribe = () => {
+  if (!user) { window.location.href = 'index.html'; return; }
+  const planoActual = P.get('plano', 'free');
+  if (planoActual === planSel) { toast(tr('ja_ativo'), 's'); return; }
+  const url = STRIPE[planSel] + '?prefilled_email=' + encodeURIComponent(user.email);
+  window.location.href = url;
+};
+
+onAuthStateChanged(auth, u => {
+  user = u;
+  if (!u) { window.location.href = 'index.html'; return; }
+
+  aplicarTextos();
+
+  // Verificar retorno do Stripe
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === 'true') {
+    const plan = params.get('plan') || 'standard';
+    P.set('plano', plan);
+    toast('Bem-vindo ao VELORA ' + (plan === 'premium' ? 'Premium' : 'Standard') + '! 🎉', 's');
+    setTimeout(() => window.location.href = 'chat.html', 2500);
+  }
+
+  // Verificar plano actual
+  const planoActual = P.get('plano', 'free');
+  if (planoActual !== 'free') {
+    const btn = document.getElementById('btn-sub');
+    btn.style.background = 'linear-gradient(135deg,#16a34a,#15803d)';
+    btn.innerHTML = '✅ ' + (planoActual === 'premium' ? 'Premium' : 'Standard') + ' activo';
+    btn.onclick = null;
+  }
+
+  // Listener de idioma
+  window.addEventListener('storage', (ev) => {
+    if (ev.key === 'vp_lang') aplicarTextos();
+    if (ev.key === 'vp_dark') document.documentElement.setAttribute('data-theme', JSON.parse(ev.newValue) ? 'dark' : 'light');
+  });
+
+  document.getElementById('ls').classList.add('h');
+});
+
+window.toast = (msg, tipo='i', dur=3000) => {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = `show ${tipo}`;
+  setTimeout(() => el.className='', dur);
+};
+</script>
+</body>
+</html>
