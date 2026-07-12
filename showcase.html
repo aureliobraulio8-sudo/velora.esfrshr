@@ -17,7 +17,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);}
 [data-theme="light"] header{background:var(--bg2);}
 .h-top{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;}
-.logo{font-size:22px;font-weight:900;font-style:italic;letter-spacing:-0.5px;background:linear-gradient(135deg,#fff,#9b12d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.logo{font-size:22px;font-weight:900;font-style:italic;letter-spacing:-0.5px;color:var(--accent);}
 [data-theme="light"] .logo{background:linear-gradient(135deg,#111,#9b12d4);-webkit-background-clip:text;}
 .h-actions{display:flex;align-items:center;gap:10px;}
 .btn-avatar{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#f472b6;cursor:pointer;overflow:hidden;flex-shrink:0;}
@@ -79,19 +79,19 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
 
 /* ── CARD ── */
 .ic{border-radius:14px;overflow:hidden;position:relative;background:var(--bg3);cursor:pointer;}
-.ic img{width:100%;height:100%;object-fit:cover;display:block;}
-.ic.wide{aspect-ratio:2/3;}
-.ic.sq{aspect-ratio:2/3;}
+.ic img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.5) saturate(1.1) contrast(1.05);}
+.ic.wide{aspect-ratio:1/2;}
+.ic.sq{aspect-ratio:1/2;}
 .ic.tall{aspect-ratio:3/4;}
 
 /* ── OVERLAY ── */
-.ov{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.05) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;}
+.ov{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.2) 45%,rgba(0,0,0,0.02) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;}
 .ov-accent{position:absolute;left:0;top:0;bottom:0;width:3.5px;background:linear-gradient(to bottom,transparent,rgba(155,18,212,1),transparent);z-index:3;}
 
 /* Motivação */
-.mot-f{font-size:17px;font-weight:900;color:#fff;line-height:1.3;text-shadow:0 2px 16px rgba(0,0,0,1);padding-left:12px;}
-.mot-f.lg{font-size:20px;}
-.mot-f.sm{font-size:14px;}
+.mot-f{font-size:16px;font-weight:900;color:#fff;line-height:1.3;text-shadow:0 2px 16px rgba(0,0,0,1);padding-left:12px;}
+.mot-f.lg{font-size:17px;}
+.mot-f.sm{font-size:16px;}
 .mot-s{font-size:10px;color:rgba(255,255,255,0.5);margin-top:5px;text-transform:uppercase;letter-spacing:0.8px;padding-left:12px;}
 
 /* Poesia */
@@ -109,7 +109,7 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
 
 /* Legenda */
 .leg-tipo{font-size:9px;font-weight:800;letter-spacing:2px;color:#9b12d4;background:rgba(155,18,212,0.18);border:1px solid rgba(155,18,212,0.5);border-radius:5px;padding:2px 8px;width:fit-content;margin-bottom:6px;}
-.leg-txt{font-size:12px;color:rgba(255,255,255,0.95);line-height:1.6;text-shadow:0 2px 12px rgba(0,0,0,1);}
+.leg-txt{font-size:16px;color:rgba(255,255,255,0.95);line-height:1.6;text-shadow:0 2px 12px rgba(0,0,0,1);}
 
 /* Badge */
 .vb{position:absolute;bottom:6px;right:8px;z-index:4;font-size:8px;font-weight:700;color:rgba(255,255,255,0.2);letter-spacing:1px;}
@@ -177,6 +177,33 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
   <div class="qa" onclick="location.href='plus.html'">
     <div class="qa-ic"><i class="fa-solid fa-crown"></i></div>
     <div><div class="qa-name">VELORA Plus</div><div class="qa-sub">Ilimitado</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--     QUALIDADE EXTREMA (topo)           -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t">✨ Qualidade Extrema</div><button class="sec-b" onclick="location.href='chat.html'">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1516537219851-920e2670c6e3?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1758404196311-70c62a445e9c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1516192518150-0d8fee5425e3?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1748877358933-3ebea732c22c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1482685945432-29a7abf2f466?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1694619100998-3b5ae167399c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1464002255390-2de63a26c637?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1721989253140-6eed5af612e3?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1714495412938-addb0ed62c1e?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1684925092698-9f69ba626b1c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1692589250460-1ea229c9942a?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1763819067881-4ad660248893?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1545393941-28efddb913bc?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+
   </div>
 </div>
 
@@ -301,6 +328,12 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
       <span class="vb">VELORA IA</span>
     </div>
 
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1615572766543-06c21416eb05?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm">A estrada é longa,<br>mas tu és mais forte.</div><div class="mot-s">Segue em frente</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
   </div>
 </div>
 
@@ -324,19 +357,19 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
     </div>
 
     <div class="ic sq">
-      <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=2600&q=95" alt=""/>
+      <img src="https://images.unsplash.com/photo-1764624005034-77d889186ecb?w=2600&q=95" alt=""/>
       <div class="ov"><div class="poe-t lg">Liberdade</div><div class="poe-v lg">Livre é quem voa sem pedir licença<br>ao vento que sopra em qualquer direção.</div></div>
       <span class="vb">VELORA IA</span>
     </div>
 
     <div class="ic sq">
-      <img src="https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=2000&q=95" alt=""/>
+      <img src="https://images.unsplash.com/photo-1761869081090-21a60b140d43?w=2000&q=95" alt=""/>
       <div class="ov"><div class="poe-t">Saudade</div><div class="poe-v">Saudade é o amor<br>que ficou<br>sem ter onde ir.</div></div>
       <span class="vb">VELORA IA</span>
     </div>
 
     <div class="ic sq">
-      <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc3e?w=2000&q=95" alt=""/>
+      <img src="https://images.unsplash.com/photo-1536525688027-073c8235975f?w=2000&q=95" alt=""/>
       <div class="ov"><div class="poe-t">Beleza</div><div class="poe-v">Cada pétala<br>é um poema<br>que a natureza<br>escreve.</div></div>
       <span class="vb">VELORA IA</span>
     </div>
@@ -403,7 +436,7 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
     </div>
 
     <div class="ic sq" style="position:relative;">
-      <img src="https://images.unsplash.com/photo-1534308143481-c55f00dc4d4e?w=2000&q=95" alt=""/>
+      <img src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?w=2000&q=95" alt=""/>
       <div class="mem-bg"></div>
       <div class="mem-t"><div class="mem-txt">O meu banco<br>às 6h da manhã:</div></div>
       <div class="mem-e">😱</div>
@@ -448,6 +481,12 @@ header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px 
     <div class="ic sq">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&q=95" alt=""/>
       <div class="ov"><div class="leg-tipo">MOTIVACIONAL</div><div class="leg-txt">Grandes resultados<br>exigem grande<br>coragem. 💜</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1759504677326-ed09c6dc7bc8?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="leg-tipo">CIDADE</div><div class="leg-txt">Constrói o teu império,<br>tijolo a tijolo. 🏙️</div></div>
       <span class="vb">VELORA IA</span>
     </div>
 
