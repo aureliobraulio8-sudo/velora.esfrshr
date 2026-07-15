@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>VELORA IA</title>
+<script>!function(){function g(k,d){try{return JSON.parse(localStorage.getItem('vp_'+k))??d}catch(e){return d}}var dark=g('dark',true);document.documentElement.setAttribute('data-theme',dark?'dark':'light');}();</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+:root,[data-theme="dark"]{--bg:#000;--bg2:#080008;--bg3:#0d000d;--border:#1a001a;--accent:#9b12d4;--accent2:#9b12d4;--text:#fff;--text2:#bbb;--text3:#555;}
+[data-theme="light"]{--bg:#f8f8f8;--bg2:#fff;--bg3:#f0f0f0;--border:#e0e0e0;--text:#111;--text2:#555;--text3:#999;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;padding-bottom:24px;}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);}
+[data-theme="light"] header{background:var(--bg2);}
+.h-top{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;}
+.logo{font-size:22px;font-weight:900;font-style:italic;letter-spacing:-0.5px;color:var(--accent);}
+.h-actions{display:flex;align-items:center;gap:10px;}
+.btn-avatar{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#f472b6;cursor:pointer;overflow:hidden;flex-shrink:0;}
+.btn-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.btn-plus-h{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;color:#fff;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;}
+
+/* ── HERO ── */
+.hero{padding:24px 18px 16px;text-align:center;}
+.hero-tag{display:inline-block;background:rgba(155,18,212,0.1);border:1px solid rgba(155,18,212,0.3);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1.5px;margin-bottom:10px;}
+.hero-title{font-size:24px;font-weight:900;line-height:1.2;margin-bottom:6px;}
+.hero-title span{color:var(--accent);}
+.hero-sub{font-size:13px;color:var(--text2);line-height:1.5;}
+
+/* ── QUICK ACTIONS ── */
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:16px 18px 0;}
+.qa{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .15s;}
+.qa:hover{border-color:var(--accent);}
+.qa-ic{width:38px;height:38px;border-radius:10px;background:rgba(155,18,212,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--accent);flex-shrink:0;}
+.qa-name{font-size:14px;font-weight:700;color:var(--text);}
+.qa-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+.qa-full{grid-column:1/-1;}
+
+/* ── SECÇÕES ── */
+.sec{padding:28px 18px 0;}
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.sec-t{font-size:18px;font-weight:800;}
+.sec-b{background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;}
+
+/* ── GRIDS ── */
+.grid-mix{display:grid;grid-template-areas:'a a' 'b c' 'd d' 'e e' 'f g' 'h h' 'i i' 'j k' 'l l' 'm m' 'n o' 'p p' 'q q' 'r s';grid-template-columns:1fr 1fr;gap:8px;}
+.grid-mix .ic:nth-child(1){grid-area:a;}
+.grid-mix .ic:nth-child(2){grid-area:b;}
+.grid-mix .ic:nth-child(3){grid-area:c;}
+.grid-mix .ic:nth-child(4){grid-area:d;}
+.grid-mix .ic:nth-child(5){grid-area:e;}
+.grid-mix .ic:nth-child(6){grid-area:f;}
+.grid-mix .ic:nth-child(7){grid-area:g;}
+.grid-mix .ic:nth-child(8){grid-area:h;}
+.grid-mix .ic:nth-child(9){grid-area:i;}
+.grid-mix .ic:nth-child(10){grid-area:j;}
+.grid-mix .ic:nth-child(11){grid-area:k;}
+.grid-mix .ic:nth-child(12){grid-area:l;}
+.grid-mix .ic:nth-child(13){grid-area:m;}
+.grid-mix .ic:nth-child(14){grid-area:n;}
+.grid-mix .ic:nth-child(15){grid-area:o;}
+.grid-mix .ic:nth-child(16){grid-area:p;}
+.grid-mix .ic:nth-child(17){grid-area:q;}
+.grid-mix .ic:nth-child(18){grid-area:r;}
+.grid-mix .ic:nth-child(19){grid-area:s;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.grid-mix-poe{display:grid;grid-template-areas:'a b' 'c c' 'd e' 'f f';grid-template-columns:1fr 1fr;gap:8px;}
+.grid-mix-poe .ic:nth-child(1){grid-area:a;}
+.grid-mix-poe .ic:nth-child(2){grid-area:b;}
+.grid-mix-poe .ic:nth-child(3){grid-area:c;}
+.grid-mix-poe .ic:nth-child(4){grid-area:d;}
+.grid-mix-poe .ic:nth-child(5){grid-area:e;}
+.grid-mix-poe .ic:nth-child(6){grid-area:f;}
+
+/* ── CARD ── */
+.ic{border-radius:14px;overflow:hidden;position:relative;background:var(--bg3);cursor:pointer;}
+.ic img{width:100%;height:100%;object-fit:cover;display:block;}
+.ic.wide{aspect-ratio:1/2;}
+.ic.sq{aspect-ratio:1/2;}
+.ic.tall{aspect-ratio:3/4;}
+
+/* ── OVERLAY ── */
+.ov{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.2) 45%,rgba(0,0,0,0.02) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;}
+.ov-accent{position:absolute;left:0;top:0;bottom:0;width:3.5px;background:linear-gradient(to bottom,transparent,rgba(155,18,212,1),transparent);z-index:3;}
+
+/* Motivação */
+.mot-f{font-size:16px;font-weight:900;color:#fff;line-height:1.3;text-shadow:0 2px 16px rgba(0,0,0,1);padding-left:12px;}
+.mot-f.lg{font-size:17px;}
+.mot-f.sm{font-size:16px;}
+.mot-s{font-size:10px;color:rgba(255,255,255,0.5);margin-top:5px;text-transform:uppercase;letter-spacing:0.8px;padding-left:12px;}
+
+/* Poesia */
+.poe-t{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:rgba(155,18,212,0.98);margin-bottom:5px;text-shadow:0 0 16px rgba(155,18,212,0.6);}
+.poe-t.lg{font-size:17px;}
+.poe-v{font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:rgba(255,255,255,0.93);line-height:1.7;text-shadow:0 2px 12px rgba(0,0,0,1);}
+.poe-v.lg{font-size:14px;}
+
+/* Meme */
+.mem-bg{position:absolute;inset:0;z-index:2;background:rgba(0,0,0,0.52);}
+.mem-t{position:absolute;top:10px;left:0;right:0;z-index:3;text-align:center;padding:0 10px;}
+.mem-e{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;font-size:36px;line-height:1;}
+.mem-b{position:absolute;bottom:10px;left:0;right:0;z-index:3;text-align:center;padding:0 10px;}
+.mem-txt{font-size:13px;font-weight:900;color:#fff;line-height:1.3;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;}
+
+/* Legenda */
+.leg-tipo{font-size:9px;font-weight:800;letter-spacing:2px;color:#9b12d4;background:rgba(155,18,212,0.18);border:1px solid rgba(155,18,212,0.5);border-radius:5px;padding:2px 8px;width:fit-content;margin-bottom:6px;}
+.leg-txt{font-size:16px;color:rgba(255,255,255,0.95);line-height:1.6;text-shadow:0 2px 12px rgba(0,0,0,1);}
+
+/* Badge */
+.vb{position:absolute;bottom:6px;right:8px;z-index:4;font-size:8px;font-weight:700;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+
+/* ── VIRALIZAR ── */
+.vir-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:10px;position:relative;overflow:hidden;}
+.vir-num{font-size:52px;font-weight:900;color:rgba(155,18,212,0.06);position:absolute;top:-8px;right:12px;line-height:1;}
+.vir-badge{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;padding:3px 12px;font-size:11px;font-weight:800;color:#fff;letter-spacing:1px;margin-bottom:10px;}
+.vir-title{font-size:17px;font-weight:800;margin-bottom:12px;line-height:1.3;color:var(--text);}
+.vir-steps{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.vir-step{display:flex;align-items:flex-start;gap:10px;}
+.step-n{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px;}
+.step-txt{color:var(--text2);font-size:14px;line-height:1.5;}
+.step-txt strong{color:var(--text);display:block;font-weight:700;margin-bottom:1px;}
+.vir-tag{display:inline-flex;gap:5px;align-items:center;background:rgba(155,18,212,0.1);border:1px solid rgba(155,18,212,0.2);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--accent);margin-top:12px;}
+
+/* ── CTA ── */
+.cta{margin:28px 18px 0;background:linear-gradient(135deg,rgba(155,18,212,0.1),rgba(155,18,212,0.1));border:1px solid rgba(155,18,212,0.25);border-radius:20px;padding:28px 20px;text-align:center;}
+.cta-t{font-size:22px;font-weight:900;margin-bottom:6px;}
+.cta-s{color:var(--text2);font-size:13px;margin-bottom:18px;line-height:1.5;}
+.btn-cta{width:100%;padding:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:10px;}
+.btn-sec{width:100%;padding:13px;background:transparent;border:1.5px solid var(--border);border-radius:14px;color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;}
+
+/* ── BOTTOM NAV ── */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--bg);border-top:1px solid var(--border);display:flex;padding:6px 0 16px;}
+[data-theme="light"] .bnav{background:var(--bg2);}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px;cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;}
+.bn i{font-size:20px;color:var(--text3);}
+.bn span{font-size:10px;font-weight:600;color:var(--text3);}
+.bn.active i,.bn.active span{color:var(--accent);}
+/* ── LIGHTBOX ── */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.94);z-index:2000;display:none;align-items:center;justify-content:center;padding:24px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:100%;max-height:100%;border-radius:14px;object-fit:contain;}
+.lightbox-close{position:absolute;top:20px;left:20px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;}
+.lightbox-close:hover{background:rgba(255,255,255,0.2);}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="h-top">
+    <div class="logo">VELORA IA</div>
+    <div class="h-actions">
+      <button class="btn-plus-h" onclick="location.href='plus.html'">Plus 👑</button>
+      <div class="btn-avatar" id="av" onclick="location.href='settings.html'">A</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag" data-t="hero_tag">CRIADO PELA VELORA IA</div>
+  <h1 class="hero-title" data-th="hero_title">Vê o que a nossa <span>IA</span> cria</h1>
+  <p class="hero-sub" data-t="hero_sub">Imagens, poesia, memes e estratégias virais — tudo em segundos</p>
+</div>
+
+<!-- ── QUICK ACTIONS ── -->
+<div class="quick">
+  <div class="qa" onclick="location.href='chat.html'">
+    <div class="qa-ic"><i class="fa-regular fa-comment"></i></div>
+    <div><div class="qa-name" data-t="qa1_name">Chat IA</div><div class="qa-sub" data-t="qa1_sub">Conversa livre</div></div>
+  </div>
+  <div class="qa" onclick="location.href='plus.html'">
+    <div class="qa-ic"><i class="fa-solid fa-crown"></i></div>
+    <div><div class="qa-name" data-t="qa2_name">VELORA Plus</div><div class="qa-sub" data-t="qa2_sub">Ilimitado</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--     QUALIDADE EXTREMA (topo)           -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t" data-t="sec_extrema_t">✨ Qualidade Extrema</div><button class="sec-b" onclick="location.href='chat.html'" data-t="btn_criar">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1516537219851-920e2670c6e3?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1758404196311-70c62a445e9c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1516192518150-0d8fee5425e3?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1748877358933-3ebea732c22c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1482685945432-29a7abf2f466?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1694619100998-3b5ae167399c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1464002255390-2de63a26c637?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1721989253140-6eed5af612e3?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1714495412938-addb0ed62c1e?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1684925092698-9f69ba626b1c?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1692589250460-1ea229c9942a?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1763819067881-4ad660248893?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+    <div class="ic sq"><img src="https://images.unsplash.com/photo-1545393941-28efddb913bc?w=1400&q=95" alt=""/><span class="vb">VELORA IA</span></div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           MOTIVAÇÃO                   -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t" data-t="sec_mot_t">💪 Motivação</div><button class="sec-b" onclick="location.href='chat.html'" data-t="btn_criar">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1692589250460-1ea229c9942a?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot1_f">O teu único limite<br>és tu mesmo.</div><div class="mot-s" data-t="mot1_s">Acredita no processo</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1740149264360-dde6fd70dcc7?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot2_f">Cai.<br>Levanta.<br>Vence.</div><div class="mot-s" data-t="mot2_s">Nunca desistas</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1740149264853-6d19fe181739?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot3_f">O caminho<br>é teu.</div><div class="mot-s" data-t="mot3_s">Mantém o foco</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1516203044232-019c01822a3c?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot4_f">O sucesso não<br>tem atalho.</div><div class="mot-s" data-t="mot4_s">Só trabalho e dedicação</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1684925092698-9f69ba626b1c?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot5_f">As montanhas mais altas<br>têm a vista mais linda.</div><div class="mot-s" data-t="mot5_s">Persiste sempre</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1763819067881-4ad660248893?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot6_f">Começa<br>hoje.</div><div class="mot-s" data-t="mot6_s">Não amanhã</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1761209326883-6d7e2ae93da8?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot7_f">A coragem<br>é a chave.</div><div class="mot-s" data-t="mot7_s">Arrisca e cresce</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1548625149-720134d51a3a?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot8_f">Cada amanhecer<br>é uma nova chance.</div><div class="mot-s" data-t="mot8_s">Aproveita o momento</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot9_f">A natureza cura tudo<br>que a pressa estraga.</div><div class="mot-s" data-t="mot9_s">Respira fundo</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot10_f">Nem toda jornada<br>tem sombra.</div><div class="mot-s" data-t="mot10_s">Continua a andar</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1464002255390-2de63a26c637?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot11_f">O mar ensina<br>a recomeçar.</div><div class="mot-s" data-t="mot11_s">Deixa fluir</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot12_f">Onde há água,<br>há vida e serenidade.</div><div class="mot-s" data-t="mot12_s">Encontra a tua calma</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot13_f">Sonha grande.<br>Trabalha mais.</div><div class="mot-s" data-t="mot13_s">O luxo é conquistado</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1580679568899-be51739ba2df?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot14_f">A ambição<br>move o mundo.</div><div class="mot-s" data-t="mot14_s">Acelera</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot15_f">Constrói a vida<br>que desejas.</div><div class="mot-s" data-t="mot15_s">Passo a passo</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1714495412938-addb0ed62c1e?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot16_f">O teu esforço hoje<br>é o teu lar de amanhã.</div><div class="mot-s" data-t="mot16_s">Investe em ti</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1721989253140-6eed5af612e3?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="ov-accent"></div><div class="mot-f lg" data-th="mot17_f">A liberdade<br>não tem preço.</div><div class="mot-s" data-t="mot17_s">Vive sem limites</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1556649102-18d00a0d314f?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot18_f">Deixa as ondas<br>levar o stress.</div><div class="mot-s" data-t="mot18_s">Relaxa</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot19_f">Cada pôr do sol<br>é uma vitória.</div><div class="mot-s" data-t="mot19_s">Celebra a vida</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1615572766543-06c21416eb05?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="mot-f sm" data-th="mot20_f">A estrada é longa,<br>mas tu és mais forte.</div><div class="mot-s" data-t="mot20_s">Segue em frente</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           POESIA                      -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t" data-t="sec_poe_t">🖤 Poesia</div><button class="sec-b" onclick="location.href='chat.html'" data-t="btn_criar">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="poe-t" data-t="poe1_t">Amor</div><div class="poe-v" data-th="poe1_v">Guardei o teu<br>sorriso no vento.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="poe-t" data-t="poe2_t">Solidão</div><div class="poe-v" data-th="poe2_v">O silêncio fala<br>mais que mil<br>palavras.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1764624005034-77d889186ecb?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="poe-t lg" data-t="poe3_t">Liberdade</div><div class="poe-v lg" data-th="poe3_v">Livre é quem voa sem pedir licença<br>ao vento que sopra em qualquer direção.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1761869081090-21a60b140d43?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="poe-t" data-t="poe4_t">Saudade</div><div class="poe-v" data-th="poe4_v">Saudade é o amor<br>que ficou<br>sem ter onde ir.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1536525688027-073c8235975f?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="poe-t" data-t="poe5_t">Beleza</div><div class="poe-v" data-th="poe5_v">Cada pétala<br>é um poema<br>que a natureza<br>escreve.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2600&q=95" alt=""/>
+      <div class="ov"><div class="poe-t lg" data-t="poe6_t">Esperança</div><div class="poe-v lg" data-th="poe6_v">O mar devolve sempre à praia<br>o que o vento levou com pressa.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           MEMES                       -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t" data-t="sec_mem_t">😂 Memes</div><button class="sec-b" onclick="location.href='chat.html'" data-t="btn_criar">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=2000&q=95" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt" data-th="mem1_top">EU: hoje vou ser<br>muito produtivo</div></div>
+      <div class="mem-e">📱</div>
+      <div class="mem-b"><div class="mem-txt" data-th="mem1_bot">Eu 5 minutos depois:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=2000&q=95" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt" data-th="mem2_top">Segunda-feira às 7h</div></div>
+      <div class="mem-e">😭</div>
+      <div class="mem-b"><div class="mem-txt" data-th="mem2_bot">O meu humor:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=2000&q=95" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt" data-th="mem3_top">Carteira dia 1:</div></div>
+      <div class="mem-e">💸</div>
+      <div class="mem-b"><div class="mem-txt" data-th="mem3_bot">Carteira dia 30:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=2000&q=95" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt" data-th="mem4_top">"A dieta começa<br>amanhã"</div></div>
+      <div class="mem-e">🍕</div>
+      <div class="mem-b"><div class="mem-txt" data-th="mem4_bot">Eu às 23h59:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1525904097878-94fb15835963?w=2000&q=95" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt" data-th="mem5_top">Quando dizes<br>"só 5 minutos"</div></div>
+      <div class="mem-e">⏰</div>
+      <div class="mem-b"><div class="mem-txt" data-th="mem5_bot">3 horas depois:</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?w=2000&q=95" alt=""/>
+      <div class="mem-bg"></div>
+      <div class="mem-t"><div class="mem-txt" data-th="mem6_top">O meu banco<br>às 6h da manhã:</div></div>
+      <div class="mem-e">😱</div>
+      <div class="mem-b"><div class="mem-txt" data-th="mem6_bot">"Saldo insuficiente"</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           LEGENDAS                    -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t" data-t="sec_leg_t">✍️ Legendas</div><button class="sec-b" onclick="location.href='legend.html'" data-t="btn_criar_legend">Criar →</button></div>
+  <div class="grid-2">
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="leg-tipo" data-t="leg1_tipo">INSTAGRAM</div><div class="leg-txt" data-th="leg1_txt">O caminho constrói-se<br>enquanto andas. 🌱<br><br>Qual é o teu próximo passo?</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="leg-tipo" data-t="leg2_tipo">TIKTOK HOOK</div><div class="leg-txt" data-th="leg2_txt">Para de fazer isto<br>no TikTok se queres<br>crescer → 🎯</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="leg-tipo" data-t="leg3_tipo">VIAGEM</div><div class="leg-txt" data-th="leg3_txt">O mundo é grande<br>e tu és livre<br>para explorá-lo. 🌍</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="leg-tipo" data-t="leg4_tipo">FOOD</div><div class="leg-txt" data-th="leg4_txt">A vida é curta<br>para comer mal. 🍽️<br><br>Celebra cada refeição.</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="leg-tipo" data-t="leg5_tipo">MOTIVACIONAL</div><div class="leg-txt" data-th="leg5_txt">Grandes resultados<br>exigem grande<br>coragem. 💜</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+    <div class="ic sq">
+      <img src="https://images.unsplash.com/photo-1759504677326-ed09c6dc7bc8?w=2000&q=95" alt=""/>
+      <div class="ov"><div class="leg-tipo" data-t="leg6_tipo">CIDADE</div><div class="leg-txt" data-th="leg6_txt">Constrói o teu império,<br>tijolo a tijolo. 🏙️</div></div>
+      <span class="vb">VELORA IA</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--           VIRALIZAR                   -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-t" data-t="sec_vir_t">🚀 Viralizar</div><button class="sec-b" onclick="location.href='chat.html'" data-t="btn_aprender">Aprender →</button></div>
+
+  <div class="vir-card">
+    <div class="vir-num">01</div>
+    <div class="vir-badge" data-t="vir1_badge">VIRAL EM 24H</div>
+    <div class="vir-title" data-t="vir1_title">3 passos para viralizar amanhã</div>
+    <ul class="vir-steps">
+      <li class="vir-step"><div class="step-n">1</div><div class="step-txt"><strong data-th="vir1_s1">Gancho nos primeiros 3 segundos</strong>Começa com "Ninguém te conta isto sobre..." — para o scroll imediatamente e cria curiosidade irresistível.</div></li>
+      <li class="vir-step"><div class="step-n">2</div><div class="step-txt"><strong data-th="vir1_s2">Valor real e aplicável hoje</strong>Dá uma dica genuína que as pessoas possam usar hoje. Conteúdo útil é sempre partilhado.</div></li>
+      <li class="vir-step"><div class="step-n">3</div><div class="step-txt"><strong data-th="vir1_s3">CTA de partilha no final</strong>"Partilha com alguém que precisa de ver isto." Simples e aumenta o alcance 3x.</div></li>
+    </ul>
+    <div class="vir-tag"><i class="fa-solid fa-arrow-trend-up" style="font-size:10px;"></i> data-t="vir1_tag">TikTok · Instagram · Reels</div>
+  </div>
+
+  <div class="vir-card">
+    <div class="vir-num">02</div>
+    <div class="vir-badge" data-t="vir2_badge">MIL SEGUIDORES EM 2 DIAS</div>
+    <div class="vir-title" data-t="vir2_title">O que fazer para crescer muito rápido</div>
+    <ul class="vir-steps">
+      <li class="vir-step"><div class="step-n">1</div><div class="step-txt"><strong data-th="vir2_s1">Comenta em contas grandes</strong>Comentários com valor real em perfis 100k+. A audiência deles vê o teu nome.</div></li>
+      <li class="vir-step"><div class="step-n">2</div><div class="step-txt"><strong data-th="vir2_s2">Posta 3x por dia nos picos</strong>7h-9h, 12h-14h e 19h-21h. São os momentos de maior actividade do algoritmo.</div></li>
+      <li class="vir-step"><div class="step-n">3</div><div class="step-txt"><strong data-th="vir2_s3">Responde a todos nos primeiros 60 min</strong>O algoritmo detecta o engagement e distribui o teu conteúdo a muito mais pessoas.</div></li>
+      <li class="vir-step"><div class="step-n">4</div><div class="step-txt"><strong data-th="vir2_s4">Colabora com outros criadores</strong>Dueto ou menção mútua — a audiência deles passa a conhecer-te em minutos.</div></li>
+    </ul>
+    <div class="vir-tag"><i class="fa-solid fa-arrow-trend-up" style="font-size:10px;"></i> data-t="vir2_tag">Crescimento Rápido · Estratégia</div>
+  </div>
+
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta">
+  <div class="cta-t" data-t="cta_t">Pronto para criar? ✨</div>
+  <p class="cta-s" data-t="cta_s">Começa grátis. Sem cartão. Sem compromissos.</p>
+  <button class="btn-cta" onclick="location.href='chat.html'" data-t="btn_cta">🚀 Começar a Criar Agora</button>
+  <button class="btn-sec" onclick="location.href='plus.html'" data-t="btn_sec_plus">Ver Planos Plus 👑</button>
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-arrow-left"></i></button>
+  <img id="lightbox-img" src="" alt=""/>
+</div>
+
+<script>
+// Carregar avatar
+(function(){
+  const uid = localStorage.getItem('velora_uid');
+  if (!uid) return;
+  const foto = localStorage.getItem('velora_foto_' + uid);
+  const av = document.getElementById('av');
+  if (foto) av.innerHTML = `<img src="${foto}" alt="foto">`;
+})();
+
+window.addEventListener('storage', ev => {
+  if (ev.key === 'vp_dark') document.documentElement.setAttribute('data-theme', JSON.parse(ev.newValue) ? 'dark' : 'light');
+});
+
+// Lightbox: clicar numa imagem abre-a em grande
+document.querySelectorAll('.ic').forEach(card => {
+  card.addEventListener('click', () => {
+    const img = card.querySelector('img');
+    if (img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+  });
+});
+window.closeLightbox = () => document.getElementById('lightbox').classList.remove('open');
+</script>
+
+<script>
+window.SHOWCASE_TRANSLATIONS = {"pt": {"hero_tag": "CRIADO PELA VELORA IA", "hero_title": "Vê o que a nossa <span>IA</span> cria", "hero_sub": "Imagens, poesia, memes e estratégias virais — tudo em segundos", "qa1_name": "Chat IA", "qa1_sub": "Conversa livre", "qa2_name": "VELORA Plus", "qa2_sub": "Ilimitado", "sec_extrema_t": "✨ Qualidade Extrema", "sec_mot_t": "💪 Motivação", "sec_poe_t": "🖤 Poesia", "sec_mem_t": "😂 Memes", "sec_leg_t": "✍️ Legendas", "sec_vir_t": "🚀 Viralizar", "btn_criar": "Criar →", "btn_criar_legend": "Criar →", "btn_aprender": "Aprender →", "mot1_f": "O teu único limite<br>és tu mesmo.", "mot1_s": "Acredita no processo", "mot2_f": "Cai.<br>Levanta.<br>Vence.", "mot2_s": "Nunca desistas", "mot3_f": "O caminho<br>é teu.", "mot3_s": "Mantém o foco", "mot4_f": "O sucesso não<br>tem atalho.", "mot4_s": "Só trabalho e dedicação", "mot5_f": "As montanhas mais altas<br>têm a vista mais linda.", "mot5_s": "Persiste sempre", "mot6_f": "Começa<br>hoje.", "mot6_s": "Não amanhã", "mot7_f": "A coragem<br>é a chave.", "mot7_s": "Arrisca e cresce", "mot8_f": "Cada amanhecer<br>é uma nova chance.", "mot8_s": "Aproveita o momento", "mot9_f": "A natureza cura tudo<br>que a pressa estraga.", "mot9_s": "Respira fundo", "mot10_f": "Nem toda jornada<br>tem sombra.", "mot10_s": "Continua a andar", "mot11_f": "O mar ensina<br>a recomeçar.", "mot11_s": "Deixa fluir", "mot12_f": "Onde há água,<br>há vida e serenidade.", "mot12_s": "Encontra a tua calma", "mot13_f": "Sonha grande.<br>Trabalha mais.", "mot13_s": "O luxo é conquistado", "mot14_f": "A ambição<br>move o mundo.", "mot14_s": "Acelera", "mot15_f": "Constrói a vida<br>que desejas.", "mot15_s": "Passo a passo", "mot16_f": "O teu esforço hoje<br>é o teu lar de amanhã.", "mot16_s": "Investe em ti", "mot17_f": "A liberdade<br>não tem preço.", "mot17_s": "Vive sem limites", "mot18_f": "Deixa as ondas<br>levar o stress.", "mot18_s": "Relaxa", "mot19_f": "Cada pôr do sol<br>é uma vitória.", "mot19_s": "Celebra a vida", "mot20_f": "A estrada é longa,<br>mas tu és mais forte.", "mot20_s": "Segue em frente", "poe1_t": "Amor", "poe1_v": "Guardei o teu<br>sorriso no vento.", "poe2_t": "Solidão", "poe2_v": "O silêncio fala<br>mais que mil<br>palavras.", "poe3_t": "Liberdade", "poe3_v": "Livre é quem voa sem pedir licença<br>ao vento que sopra em qualquer direção.", "poe4_t": "Saudade", "poe4_v": "Saudade é o amor<br>que ficou<br>sem ter onde ir.", "poe5_t": "Beleza", "poe5_v": "Cada pétala<br>é um poema<br>que a natureza<br>escreve.", "poe6_t": "Esperança", "poe6_v": "O mar devolve sempre à praia<br>o que o vento levou com pressa.", "mem1_top": "EU: hoje vou ser<br>muito produtivo", "mem1_bot": "Eu 5 minutos depois:", "mem2_top": "Segunda-feira às 7h", "mem2_bot": "O meu humor:", "mem3_top": "Carteira dia 1:", "mem3_bot": "Carteira dia 30:", "mem4_top": "\"A dieta começa<br>amanhã\"", "mem4_bot": "Eu às 23h59:", "mem5_top": "Quando dizes<br>\"só 5 minutos\"", "mem5_bot": "3 horas depois:", "mem6_top": "O meu banco<br>às 6h da manhã:", "mem6_bot": "\"Saldo insuficiente\"", "leg1_tipo": "INSTAGRAM", "leg1_txt": "O caminho constrói-se<br>enquanto andas. 🌱<br><br>Qual é o teu próximo passo?", "leg2_tipo": "TIKTOK HOOK", "leg2_txt": "Para de fazer isto<br>no TikTok se queres<br>crescer → 🎯", "leg3_tipo": "VIAGEM", "leg3_txt": "O mundo é grande<br>e tu és livre<br>para explorá-lo. 🌍", "leg4_tipo": "FOOD", "leg4_txt": "A vida é curta<br>para comer mal. 🍽️<br><br>Celebra cada refeição.", "leg5_tipo": "MOTIVACIONAL", "leg5_txt": "Grandes resultados<br>exigem grande<br>coragem. 💜", "leg6_tipo": "CIDADE", "leg6_txt": "Constrói o teu império,<br>tijolo a tijolo. 🏙️", "vir1_badge": "VIRAL EM 24H", "vir1_title": "3 passos para viralizar amanhã", "vir1_s1": "Gancho nos primeiros 3 segundos</strong>Começa com \"Ninguém te conta isto sobre...\" — para o scroll imediatamente e cria curiosidade irresistível.", "vir1_s2": "Valor real e aplicável hoje</strong>Dá uma dica genuína que as pessoas possam usar hoje. Conteúdo útil é sempre partilhado.", "vir1_s3": "CTA de partilha no final</strong>\"Partilha com alguém que precisa de ver isto.\" Simples e aumenta o alcance 3x.", "vir1_tag": "TikTok · Instagram · Reels", "vir2_badge": "MIL SEGUIDORES EM 2 DIAS", "vir2_title": "O que fazer para crescer muito rápido", "vir2_s1": "Comenta em contas grandes</strong>Comentários com valor real em perfis 100k+. A audiência deles vê o teu nome.", "vir2_s2": "Posta 3x por dia nos picos</strong>7h-9h, 12h-14h e 19h-21h. São os momentos de maior actividade do algoritmo.", "vir2_s3": "Responde a todos nos primeiros 60 min</strong>O algoritmo detecta o engagement e distribui o teu conteúdo a muito mais pessoas.", "vir2_s4": "Colabora com outros criadores</strong>Dueto ou menção mútua — a audiência deles passa a conhecer-te em minutos.", "vir2_tag": "Crescimento Rápido · Estratégia", "cta_t": "Pronto para criar? ✨", "cta_s": "Começa grátis. Sem cartão. Sem compromissos.", "btn_cta": "🚀 Começar a Criar Agora", "btn_sec_plus": "Ver Planos Plus 👑"}, "en": {"hero_tag": "CREATED BY VELORA IA", "hero_title": "See what our <span>AI</span> creates", "hero_sub": "Images, poetry, memes and viral strategies — all in seconds", "qa1_name": "AI Chat", "qa1_sub": "Free conversation", "qa2_name": "VELORA Plus", "qa2_sub": "Unlimited", "sec_extrema_t": "✨ Extreme Quality", "sec_mot_t": "💪 Motivation", "sec_poe_t": "🖤 Poetry", "sec_mem_t": "😂 Memes", "sec_leg_t": "✍️ Captions", "sec_vir_t": "🚀 Go Viral", "btn_criar": "Create →", "btn_criar_legend": "Create →", "btn_aprender": "Learn →", "mot1_f": "Your only limit<br>is yourself.", "mot1_s": "Believe in the process", "mot2_f": "Fall.<br>Rise.<br>Win.", "mot2_s": "Never give up", "mot3_f": "The path<br>is yours.", "mot3_s": "Stay focused", "mot4_f": "Success has<br>no shortcut.", "mot4_s": "Only work and dedication", "mot5_f": "The highest mountains<br>have the most beautiful view.", "mot5_s": "Keep pushing", "mot6_f": "Start<br>today.", "mot6_s": "Not tomorrow", "mot7_f": "Courage<br>is the key.", "mot7_s": "Take risks and grow", "mot8_f": "Every sunrise<br>is a new chance.", "mot8_s": "Seize the moment", "mot9_f": "Nature heals everything<br>that rushing breaks.", "mot9_s": "Take a deep breath", "mot10_f": "Not every journey<br>has shade.", "mot10_s": "Keep walking", "mot11_f": "The sea teaches<br>how to start over.", "mot11_s": "Let it flow", "mot12_f": "Where there is water,<br>there is life and serenity.", "mot12_s": "Find your calm", "mot13_f": "Dream big.<br>Work harder.", "mot13_s": "Luxury is earned", "mot14_f": "Ambition<br>moves the world.", "mot14_s": "Accelerate", "mot15_f": "Build the life<br>you want.", "mot15_s": "Step by step", "mot16_f": "Your effort today<br>is your home tomorrow.", "mot16_s": "Invest in yourself", "mot17_f": "Freedom<br>has no price.", "mot17_s": "Live without limits", "mot18_f": "Let the waves<br>take your stress away.", "mot18_s": "Relax", "mot19_f": "Every sunset<br>is a victory.", "mot19_s": "Celebrate life", "mot20_f": "The road is long,<br>but you are stronger.", "mot20_s": "Keep going", "poe1_t": "Love", "poe1_v": "I kept your<br>smile in the wind.", "poe2_t": "Loneliness", "poe2_v": "Silence speaks<br>louder than a thousand<br>words.", "poe3_t": "Freedom", "poe3_v": "Free is who flies without asking permission<br>to the wind that blows in any direction.", "poe4_t": "Longing", "poe4_v": "Longing is the love<br>that stayed<br>with nowhere to go.", "poe5_t": "Beauty", "poe5_v": "Every petal<br>is a poem<br>that nature<br>writes.", "poe6_t": "Hope", "poe6_v": "The sea always returns to the shore<br>what the wind hurriedly took.", "mem1_top": "ME: today I'm going<br>to be very productive", "mem1_bot": "Me 5 minutes later:", "mem2_top": "Monday at 7am", "mem2_bot": "My mood:", "mem3_top": "Wallet day 1:", "mem3_bot": "Wallet day 30:", "mem4_top": "\"The diet starts<br>tomorrow\"", "mem4_bot": "Me at 11:59pm:", "mem5_top": "When you say<br>\"just 5 minutes\"", "mem5_bot": "3 hours later:", "mem6_top": "My bank<br>at 6am:", "mem6_bot": "\"Insufficient funds\"", "leg1_tipo": "INSTAGRAM", "leg1_txt": "The path is built<br>as you walk. 🌱<br><br>What's your next step?", "leg2_tipo": "TIKTOK HOOK", "leg2_txt": "Stop doing this<br>on TikTok if you want<br>to grow → 🎯", "leg3_tipo": "TRAVEL", "leg3_txt": "The world is big<br>and you are free<br>to explore it. 🌍", "leg4_tipo": "FOOD", "leg4_txt": "Life is too short<br>to eat badly. 🍽️<br><br>Celebrate every meal.", "leg5_tipo": "MOTIVATIONAL", "leg5_txt": "Great results<br>require great<br>courage. 💜", "leg6_tipo": "CITY", "leg6_txt": "Build your empire,<br>brick by brick. 🏙️", "vir1_badge": "VIRAL IN 24H", "vir1_title": "3 steps to go viral tomorrow", "vir1_s1": "Hook in the first 3 seconds</strong>Start with \"Nobody tells you this about...\" — it stops the scroll instantly and creates irresistible curiosity.", "vir1_s2": "Real, actionable value</strong>Give a genuine tip people can use today. Useful content always gets shared.", "vir1_s3": "Share CTA at the end</strong>\"Share this with someone who needs to see it.\" Simple, and it triples your reach.", "vir1_tag": "TikTok · Instagram · Reels", "vir2_badge": "1000 FOLLOWERS IN 2 DAYS", "vir2_title": "What to do to grow really fast", "vir2_s1": "Comment on big accounts</strong>Genuinely valuable comments on 100k+ profiles. Their audience sees your name.", "vir2_s2": "Post 3x a day at peak times</strong>7-9am, 12-2pm and 7-9pm. These are the algorithm's busiest hours.", "vir2_s3": "Reply to everyone in the first 60 min</strong>The algorithm detects engagement and shows your content to way more people.", "vir2_s4": "Collaborate with other creators</strong>Duet or mutual shoutout — their audience gets to know you in minutes.", "vir2_tag": "Fast Growth · Strategy", "cta_t": "Ready to create? ✨", "cta_s": "Start for free. No card. No commitments.", "btn_cta": "🚀 Start Creating Now", "btn_sec_plus": "View Plus Plans 👑"}, "es": {"hero_tag": "CREADO POR VELORA IA", "hero_title": "Ve lo que nuestra <span>IA</span> crea", "hero_sub": "Imágenes, poesía, memes y estrategias virales — todo en segundos", "qa1_name": "Chat IA", "qa1_sub": "Conversación libre", "qa2_name": "VELORA Plus", "qa2_sub": "Ilimitado", "sec_extrema_t": "✨ Calidad Extrema", "sec_mot_t": "💪 Motivación", "sec_poe_t": "🖤 Poesía", "sec_mem_t": "😂 Memes", "sec_leg_t": "✍️ Subtítulos", "sec_vir_t": "🚀 Viralizar", "btn_criar": "Crear →", "btn_criar_legend": "Crear →", "btn_aprender": "Aprender →", "mot1_f": "Tu único límite<br>eres tú mismo.", "mot1_s": "Cree en el proceso", "mot2_f": "Caes.<br>Levantas.<br>Vences.", "mot2_s": "Nunca te rindas", "mot3_f": "El camino<br>es tuyo.", "mot3_s": "Mantén el enfoque", "mot4_f": "El éxito no<br>tiene atajos.", "mot4_s": "Solo trabajo y dedicación", "mot5_f": "Las montañas más altas<br>tienen la vista más bonita.", "mot5_s": "Persiste siempre", "mot6_f": "Empieza<br>hoy.", "mot6_s": "No mañana", "mot7_f": "El coraje<br>es la clave.", "mot7_s": "Arriesga y crece", "mot8_f": "Cada amanecer<br>es una nueva oportunidad.", "mot8_s": "Aprovecha el momento", "mot9_f": "La naturaleza cura todo<br>lo que la prisa daña.", "mot9_s": "Respira hondo", "mot10_f": "No todo viaje<br>tiene sombra.", "mot10_s": "Sigue caminando", "mot11_f": "El mar enseña<br>a empezar de nuevo.", "mot11_s": "Deja fluir", "mot12_f": "Donde hay agua,<br>hay vida y serenidad.", "mot12_s": "Encuentra tu calma", "mot13_f": "Sueña en grande.<br>Trabaja más.", "mot13_s": "El lujo se conquista", "mot14_f": "La ambición<br>mueve el mundo.", "mot14_s": "Acelera", "mot15_f": "Construye la vida<br>que deseas.", "mot15_s": "Paso a paso", "mot16_f": "Tu esfuerzo hoy<br>es tu hogar de mañana.", "mot16_s": "Invierte en ti", "mot17_f": "La libertad<br>no tiene precio.", "mot17_s": "Vive sin límites", "mot18_f": "Deja que las olas<br>se lleven el estrés.", "mot18_s": "Relájate", "mot19_f": "Cada atardecer<br>es una victoria.", "mot19_s": "Celebra la vida", "mot20_f": "El camino es largo,<br>pero tú eres más fuerte.", "mot20_s": "Sigue adelante", "poe1_t": "Amor", "poe1_v": "Guardé tu<br>sonrisa en el viento.", "poe2_t": "Soledad", "poe2_v": "El silencio habla<br>más que mil<br>palabras.", "poe3_t": "Libertad", "poe3_v": "Libre es quien vuela sin pedir permiso<br>al viento que sopla en cualquier dirección.", "poe4_t": "Añoranza", "poe4_v": "La añoranza es el amor<br>que se quedó<br>sin saber a dónde ir.", "poe5_t": "Belleza", "poe5_v": "Cada pétalo<br>es un poema<br>que la naturaleza<br>escribe.", "poe6_t": "Esperanza", "poe6_v": "El mar siempre devuelve a la playa<br>lo que el viento se llevó con prisa.", "mem1_top": "YO: hoy voy a ser<br>muy productivo", "mem1_bot": "Yo 5 minutos después:", "mem2_top": "Lunes a las 7h", "mem2_bot": "Mi humor:", "mem3_top": "Cartera día 1:", "mem3_bot": "Cartera día 30:", "mem4_top": "\"La dieta empieza<br>mañana\"", "mem4_bot": "Yo a las 23:59:", "mem5_top": "Cuando dices<br>\"solo 5 minutos\"", "mem5_bot": "3 horas después:", "mem6_top": "Mi banco<br>a las 6h de la mañana:", "mem6_bot": "\"Saldo insuficiente\"", "leg1_tipo": "INSTAGRAM", "leg1_txt": "El camino se construye<br>mientras caminas. 🌱<br><br>¿Cuál es tu próximo paso?", "leg2_tipo": "GANCHO TIKTOK", "leg2_txt": "Deja de hacer esto<br>en TikTok si quieres<br>crecer → 🎯", "leg3_tipo": "VIAJE", "leg3_txt": "El mundo es grande<br>y eres libre<br>para explorarlo. 🌍", "leg4_tipo": "COMIDA", "leg4_txt": "La vida es corta<br>para comer mal. 🍽️<br><br>Celebra cada comida.", "leg5_tipo": "MOTIVACIONAL", "leg5_txt": "Grandes resultados<br>exigen gran<br>coraje. 💜", "leg6_tipo": "CIUDAD", "leg6_txt": "Construye tu imperio,<br>ladrillo a ladrillo. 🏙️", "vir1_badge": "VIRAL EN 24H", "vir1_title": "3 pasos para viralizar mañana", "vir1_s1": "Gancho en los primeros 3 segundos</strong>Empieza con \"Nadie te cuenta esto sobre...\" — detiene el scroll al instante y crea curiosidad irresistible.", "vir1_s2": "Valor real y aplicable hoy</strong>Da un consejo genuino que la gente pueda usar hoy. El contenido útil siempre se comparte.", "vir1_s3": "CTA para compartir al final</strong>\"Comparte esto con alguien que necesite verlo.\" Simple, y triplica tu alcance.", "vir1_tag": "TikTok · Instagram · Reels", "vir2_badge": "MIL SEGUIDORES EN 2 DÍAS", "vir2_title": "Qué hacer para crecer muy rápido", "vir2_s1": "Comenta en cuentas grandes</strong>Comentarios con valor real en perfiles de 100k+. Su audiencia ve tu nombre.", "vir2_s2": "Publica 3 veces al día en las horas pico</strong>7h-9h, 12h-14h y 19h-21h. Son los momentos de mayor actividad del algoritmo.", "vir2_s3": "Responde a todos en los primeros 60 min</strong>El algoritmo detecta el engagement y distribuye tu contenido a mucha más gente.", "vir2_s4": "Colabora con otros creadores</strong>Dueto o mención mutua — su audiencia te conoce en minutos.", "vir2_tag": "Crecimiento Rápido · Estrategia", "cta_t": "¿Listo para crear? ✨", "cta_s": "Empieza gratis. Sin tarjeta. Sin compromisos.", "btn_cta": "🚀 Empezar a Crear Ahora", "btn_sec_plus": "Ver Planes Plus 👑"}};
+window.getLang = window.getLang || function(){ return (localStorage.getItem('vp_lang') || 'pt').replace(/"/g, ''); };
+window.t = window.t || function(key){
+  var lang = window.getLang();
+  var dict = window.SHOWCASE_TRANSLATIONS[lang] || window.SHOWCASE_TRANSLATIONS.pt;
+  return dict[key] || window.SHOWCASE_TRANSLATIONS.pt[key] || key;
+};
+window.aplicarIdiomaShowcase = function(){
+  document.documentElement.setAttribute('lang', window.getLang());
+  document.querySelectorAll('[data-t]').forEach(function(el){
+    el.textContent = window.t(el.getAttribute('data-t'));
+  });
+  document.querySelectorAll('[data-th]').forEach(function(el){
+    el.innerHTML = window.t(el.getAttribute('data-th'));
+  });
+};
+window.aplicarIdiomaShowcase();
+window.addEventListener('storage', function(ev){
+  if (ev.key === 'vp_lang') window.aplicarIdiomaShowcase();
+});
+</script>
+</body>
+</html>
