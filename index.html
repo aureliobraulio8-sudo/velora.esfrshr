@@ -185,14 +185,31 @@ window.submit = async () => {
   const btn = document.getElementById('btn-submit');
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner"></div>';
-  try {
-    if (isReg) await createUserWithEmailAndPassword(auth, em, pw);
-    else await signInWithEmailAndPassword(auth, em, pw);
-  } catch(e) {
+
+  function restaurarBotao() {
     btn.disabled = false;
     document.getElementById('btn-txt').textContent = t(isReg ? 'btn_register' : 'btn_access');
     btn.innerHTML = `<span id="btn-txt">${t(isReg ? 'btn_register' : 'btn_access')}</span>`;
-    showErr(errMsg(e.code));
+  }
+
+  // Nunca mais fica preso a "processar" para sempre — se demorar mais de
+  // 15 segundos, mostra um erro em vez de ficar pendurado sem explicação.
+  const tempoLimite = new Promise((_, reject) =>
+    setTimeout(() => reject({ code: 'timeout' }), 15000)
+  );
+
+  try {
+    const pedido = isReg
+      ? createUserWithEmailAndPassword(auth, em, pw)
+      : signInWithEmailAndPassword(auth, em, pw);
+    await Promise.race([pedido, tempoLimite]);
+  } catch(e) {
+    restaurarBotao();
+    if (e.code === 'timeout') {
+      showErr('A ligação está a demorar demasiado. Verifica a internet e tenta novamente, ou usa "Continuar com Google".');
+    } else {
+      showErr(errMsg(e.code));
+    }
   }
 };
 
